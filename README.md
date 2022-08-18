@@ -2,7 +2,8 @@
 
 - apt-get install docker.io
 
-- cat <<"EOF" | bash                              
+- 
+cat <<"EOF" | bash                              
 sudo apt update && \
 sudo apt install software-properties-common && \
 sudo add-apt-repository ppa:deadsnakes/ppa && \
