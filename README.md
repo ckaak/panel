@@ -20,11 +20,11 @@ docker创建网络
 启动mysql容器
 
 - mkdir /data
-- docker run -d -it --network cdntip_network -v /data/mysql:/var/lib/mysql --name panel_mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=panel mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+- docker run -d -it --network cdntip_network -v /data/mysql:/var/lib/mysql --name panel_mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=panel mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --restart=always
 
 启动 cloudpanel 
 
-- docker run -d -it --network cdntip_network -p 8111:80 --name panel cdntip/panel
+- docker run -d -it --network cdntip_network -p 8111:80 --name panel cdntip/panel --restart=always
 
 进入容器
 
@@ -38,6 +38,7 @@ docker创建网络
 
 
 打开浏览器，输入  ip:8111
+
 
 其它说明
 - 后端暂时未上传到github, 但是代码都是未加密的, 在容器中可以看到。
