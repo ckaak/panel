@@ -1,3 +1,15 @@
+安装系统环境：
+
+- apt-get install docker.io
+
+- cat <<"EOF" | bash                              
+sudo apt update && \
+sudo apt install software-properties-common && \
+sudo add-apt-repository ppa:deadsnakes/ppa && \
+sudo apt install python3.9 -y && \
+python3.9 --version
+EOF
+
 docker创建网络
 
 - docker network create cdntip_network
