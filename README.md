@@ -20,11 +20,11 @@ docker创建网络
 启动mysql容器
 
 - mkdir /data
-- docker run -d -it --restart=always --network cdntip_network -v /data/mysql:/var/lib/mysql --name panel_mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=panel mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+- docker run -d -it --network cdntip_network -v /data/mysql:/var/lib/mysql --name panel_mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=panel mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
 启动 cloudpanel 
 
-- docker run -d -it --network cdntip_network -p 8111:80 --name panel cdntip/panel --restart=always
+- docker run -d -it --network cdntip_network -p 8111:80 --name panel cdntip/panel
 
 进入容器
 
@@ -38,6 +38,16 @@ docker创建网络
 
 
 打开浏览器，输入  ip:8111
+
+
+设置服务器开机启动以及容器守护进程：
+
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+
+输入docker ps -a，查看容器ID（CONTAINER ID），然后docker update --restart=always xxxxxxxx（xxxxxx为CONTAINER ID 容器ID）
+
+
 
 
 其它说明
