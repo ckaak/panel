@@ -1,17 +1,9 @@
-安装docker和python环境：
-
-```
-apt-get install docker.io -y
+安装Docker
 ```
 
-```
-cat <<"EOF" | bash                              
-sudo apt update && \
-sudo apt install software-properties-common && \
-sudo add-apt-repository ppa:deadsnakes/ppa && \
-sudo apt install python3.9 -y && \
-python3.9 --version
-EOF
+curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+service docker start # 如果docker没启动，可以运行这个
+
 ```
 
 docker创建网络：
@@ -58,11 +50,30 @@ python manage.py aws_update_images
 设置开机启动以及容器守护进程：
 
 ```
-sudo systemctl enable docker.service
-sudo systemctl enable containerd.service
+     docker stop panel # 停止当前容器
+     docker rm panel # 删除当前容器
+     docker pull cdntip/panel:latest # 拉取最新的镜像
+     docker run -d -it --network cdntip_network -p 8111:80 --name panel cdntip/panel:latest
+     # 重新创建程序容器
 ```
 
-输入docker ps -a，查看容器ID（CONTAINER ID），然后docker update --restart=always xxxxxxxx（xxxxxx为CONTAINER ID 容器ID）
+  查看日志
+
+     docker logs -f panel
+
+  打开浏览器，输入 ip:8111
+
+  其它说明
+
+     目前支持 aws、azure、linode（1.3版本）
+     后端暂时未上传到github, 但是代码都是未加密的, 在容器中可以看到。
+     docker 暂时只有x86平台(不支持arm平台)
+     目前版本为预览版，有问题请到群里反馈 @cdntip
+
+  常见问题
+
+     重启之后面板打不开， 运行 service docker start && docker start panel_mysql &&
+     docker restart panel
 
 
 
