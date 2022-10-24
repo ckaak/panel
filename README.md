@@ -1,9 +1,7 @@
 安装Docker
 ```
-
 curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
 service docker start # 如果docker没启动，可以运行这个
-
 ```
 
 docker创建网络：
@@ -50,33 +48,27 @@ python manage.py aws_update_images
 设置开机启动以及容器守护进程：
 
 ```
-     docker stop panel # 停止当前容器
-     docker rm panel # 删除当前容器
-     docker pull cdntip/panel:latest # 拉取最新的镜像
-     docker run -d -it --network cdntip_network -p 8111:80 --name panel cdntip/panel:latest
-     # 重新创建程序容器
+docker stop panel # 停止当前容器
+docker rm panel # 删除当前容器
+docker pull cdntip/panel:latest # 拉取最新的镜像
+docker run -d -it --network cdntip_network -p 8111:80 --name panel cdntip/panel:latest
+# 重新创建程序容器
 ```
 
-  查看日志
+查看日志
 
-     docker logs -f panel
+docker logs -f panel
+打开浏览器，输入 ip:8111
 
-  打开浏览器，输入 ip:8111
+其它说明
+目前支持 aws、azure、linode（1.3版本）
+后端暂时未上传到github, 但是代码都是未加密的, 在容器中可以看到。
+docker 暂时只有x86平台(不支持arm平台)
+目前版本为预览版，有问题请到群里反馈 @cdntip
 
-  其它说明
-
-     目前支持 aws、azure、linode（1.3版本）
-     后端暂时未上传到github, 但是代码都是未加密的, 在容器中可以看到。
-     docker 暂时只有x86平台(不支持arm平台)
-     目前版本为预览版，有问题请到群里反馈 @cdntip
-
-  常见问题
-
-     重启之后面板打不开， 运行 service docker start && docker start panel_mysql &&
-     docker restart panel
-
-
-
+常见问题
+重启之后面板打不开， 运行 service docker start && docker start panel_mysql &&
+docker restart panel
 
 其它说明
 - 后端暂时未上传到github, 但是代码都是未加密的, 在容器中可以看到。
